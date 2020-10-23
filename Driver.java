@@ -1,67 +1,38 @@
 import java.util.*;
+/**
+ * This class is the class to run the game
+ */
 public class Driver
 {
 
-	
+	/**
+    * This is the main method in running the entire minesweeping program
+    */
 	public static void main(String[] Args)
 	{   
-		int x;
-		int y;
+		int x; //x-axis for column
+		int y; //y-axis for row
+		int xCheck; // check the value before pass to x
 		Scanner input = new Scanner(System.in);
-		System.out.println("Please enter the size of your game for x axis");
-		x = (int)input.nextInt();
-		System.out.println("Please enter the size of your game for y axis");
-		y = (int)input.nextInt();
+		System.out.println("Welcome to this test version of minesweeper game");
+		System.out.println("Please enter how many rows would you want the game board be(30 only)");
+		xCheck = (int)input.nextInt();
+		while(xCheck != 30){
+			System.out.println("Please enter the number again as the previous entry is not valid(30 only)");
+			xCheck = (int)input.nextInt();
 
-		GameBoard b = new GameBoard("BugSweeper", x, y, "BombSquare");
-		BombSquare[][] bs = new BombSquare[x][y];
-		boolean[][] boardMine = new boolean[x][y];
-		for(int i = 0 ; i < x; i++){
-			for(int j = 0; j < y; j++){
-				bs[i][j] = new BombSquare(i, j, b);
-				if(bs[i][j].getBombStatus())
-				boardMine[i][j] = true;
-				else boardMine[i][j] = false;
-	
-			}
 		}
-		for(int i = 0 ; i < x; i++){
-			for(int j = 0; j < y; j++){
-                if(boardMine[i][j] != true){
-				    bs[i][j].setCountNum(checkNumSurroundBomb(i, j, boardMine, x, y));
-					System.out.println("Position "+ i + " " + j + " " + " with num " + bs[i][j].getCountNum());
-				}
-				else if(boardMine[i][j] == true){
-					System.out.println("Position "+ i + " " + j + " " + " with bomb ");
-
-				}
-			}
-		}
-	   
-		
-
-
-		
-
-	}
-	 private static int checkNumSurroundBomb(int i, int j, boolean[][] boardMine, int x, int y){
+		x = xCheck;
+		y = x;
+	                                                            //Creating the game board for the game by assigning the size
        
-        int countMine = 0;    
-        if(boardMine[i][j] == false){
-            
-            if(i!=0 && j!=0 && boardMine[i-1][j-1] == true) countMine++;           //top left
-            if(i!=0 && boardMine[i-1][j] == true) countMine++;                     //top
-            if(i!=0 && j < y-1 && boardMine[i-1][j+1] == true) countMine++;          //top right
-            if(j!=0 && boardMine[i][j-1] == true) countMine++;                     //left
-            if(j < x-1 && boardMine[i][j+1] == true) countMine++;                    //right
-            if(i < x-1 && j!=0 && boardMine[i+1][j-1] == true) countMine++;          //down left
-            if(i < x-1 && boardMine[i+1][j] == true) countMine++;                    //down
-            if(i < x-1 && j < y-1 && boardMine[i+1][j+1] == true) countMine++;         //down right
-            
-        }
-        return countMine;
+        
+		GameBoard b = new GameBoard("BugSweeper", x, y, "BombSquare");
+
 
 	}
+
+	
 	
 	
 }
